@@ -1,5 +1,6 @@
 package com.elgar.walletsystem.publisher;
 
+import com.elgar.walletsystem.config.properties.QueueConfiguration;
 import com.elgar.walletsystem.model.OutboxEvent;
 import com.elgar.walletsystem.repository.OutboxEventRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,9 @@ import java.util.List;
 public class OutboxPublisher {
     private final OutboxEventRepository outboxEventRepository;
     private final RabbitTemplate rabbitTemplate;
+    private final QueueConfiguration queueConfiguration;
 
-    @Scheduled(fixedDelay = 5000) // run every 5 seconds
+    @Scheduled(fixedDelay = 5000)
     @Transactional
     public void publishPendingEvents() {
         List<OutboxEvent> events = outboxEventRepository.findByPublishedAtIsNull();
@@ -25,17 +27,17 @@ public class OutboxPublisher {
         for (OutboxEvent event : events) {
             try {
                 rabbitTemplate.convertAndSend(
-                        "wallet.txn.exchange",   // exchange
-                        "wallet.txn",            // routing key
-                        event.getPayload()       // payload JSON
+                       queueConfiguration.getWallet().getExchange(),
+                        queueConfiguration.getWallet().getRoutingKey(),
+                        event.getPayload()
                 );
 
                 event.setPublishedAt(Instant.now());
                 outboxEventRepository.save(event);
 
             } catch (Exception e) {
-                // leave unpublished so it retries next run
-                System.err.println("❌ Failed to publish event " + event.getId() + ": " + e.getMessage());
+
+                System.err.println("Failed to publish event " + event.getId() + ": " + e.getMessage());
             }
         }
     }

@@ -11,11 +11,11 @@ public class SchedulingConfig {
     @Bean
     public ThreadPoolTaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-        scheduler.setPoolSize(2); // number of threads for concurrent scheduled tasks
+        scheduler.setPoolSize(2);
         scheduler.setThreadNamePrefix("scheduler-");
         scheduler.setRemoveOnCancelPolicy(true);
         scheduler.setWaitForTasksToCompleteOnShutdown(true);
-        scheduler.setAwaitTerminationSeconds(30); // wait 30s on shutdown for tasks to complete
+        scheduler.setAwaitTerminationSeconds(30);
         return scheduler;
     }
 }
