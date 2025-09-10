@@ -1,0 +1,85 @@
+databaseChangeLog:
+  - changeSet:
+      id: wallet_schema_20250928_1
+      author: Elgar Mokaya
+      runOnChange: false
+      runInTransaction: true
+      changes:
+        sqlFile:
+          path: classpath:/db/migration/schemas/customer.sql
+          encoding: UTF-8
+          relativeToChangelogFile: false
+          endDelimiter: //
+          splitStatements: true
+  - changeSet:
+      id: wallet_schema_20250928_2
+      author: Elgar Mokaya
+      runOnChange: false
+      runInTransaction: true
+      changes:
+        sqlFile:
+          path: classpath:/db/migration/schemas/outbox_event.sql
+          encoding: UTF-8
+          relativeToChangelogFile: false
+          endDelimiter: //
+          splitStatements: true
+  - changeSet:
+      id: wallet_schema_20250928_3
+      author: Elgar Mokaya
+      runOnChange: false
+      runInTransaction: true
+      changes:
+        sqlFile:
+          path: classpath:/db/migration/schemas/reconciliation_file.sql
+          encoding: UTF-8
+          relativeToChangelogFile: false
+          endDelimiter: //
+          splitStatements: true
+  - changeSet:
+      id: wallet_schema_20250928_4
+      author: Elgar Mokaya
+      runOnChange: false
+      runInTransaction: true
+      changes:
+        sqlFile:
+          path: classpath:/db/migration/schemas/reconciliation_item.sql
+          encoding: UTF-8
+          relativeToChangelogFile: false
+          endDelimiter: //
+          splitStatements: true
+  - changeSet:
+      id: wallet_schema_20250928_5
+      author: Elgar Mokaya
+      runOnChange: false
+      runInTransaction: true
+      changes:
+        sqlFile:
+          path: classpath:/db/migration/schemas/reconciliation_summary.sql
+          encoding: UTF-8
+          relativeToChangelogFile: false
+          endDelimiter: //
+          splitStatements: true
+  - changeSet:
+      id: wallet_schema_20250928_6
+      author: Elgar Mokaya
+      runOnChange: false
+      runInTransaction: true
+      changes:
+        sqlFile:
+          path: classpath:/db/migration/schemas/wallet.sql
+          encoding: UTF-8
+          relativeToChangelogFile: false
+          endDelimiter: //
+          splitStatements: true
+  - changeSet:
+      id: wallet_schema_20250928_7
+      author: Elgar Mokaya
+      runOnChange: false
+      runInTransaction: true
+      changes:
+        sqlFile:
+          path: classpath:/db/migration/schemas/wallet_transaction.sql
+          encoding: UTF-8
+          relativeToChangelogFile: false
+          endDelimiter: //
+          splitStatements: true

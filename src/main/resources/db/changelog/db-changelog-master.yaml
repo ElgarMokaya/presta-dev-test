@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: ../migration/schemas-changelog.yml
+      relativeToChangelogFile: true
+  - include:
+      file: ../migration/fields-changelog.yml
+      relativeToChangelogFile: true
+#  - include:
+#      file: ../migration/data-changelog.yml
+#      relativeToChangelogFile: true

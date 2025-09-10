@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-09-07-01-add_uq_wallet_client_txn_constraint.sql
+      author: Elgar Mokaya
+      runOnChange: false
+      runInTransaction: true
+      changes:
+        sqlFile:
+          path: classpath:db/migration/schemas/fields/add_uq_wallet_client_txn_constraint.sql
+          encoding: UTF-8
+          relativeToChangelogFile: false
+          endDelimiter: //
+          splitStatements: true

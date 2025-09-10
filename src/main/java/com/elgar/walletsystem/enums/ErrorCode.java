@@ -1,0 +1,10 @@
+package com.elgar.walletsystem.enums;
+
+public enum ErrorCode {
+    WALLET_NOT_FOUND,
+    INSUFFICIENT_FUNDS,
+    DUPLICATE_TRANSACTION,
+    RECONCILIATION_FILE_NOT_FOUND,
+    BUSINESS_RULE_VIOLATION,
+    INTERNAL_ERROR
+}
