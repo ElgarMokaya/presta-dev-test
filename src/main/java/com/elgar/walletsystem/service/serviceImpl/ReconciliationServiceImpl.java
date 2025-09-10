@@ -23,8 +23,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -66,15 +64,13 @@ public void ingestFile(LocalDate businessDate, String source, MultipartFile file
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (line.isBlank()) {
-                continue; // Skip blank lines
+                continue;
             }
 
             String[] parts = line.split(",");
 
             // Validate that the line has at least 2 parts (for txnId and amount)
             if (parts.length < 2) {
-                // You can add logging here to notify about malformed lines
-                System.err.println("Skipping malformed line with less than 2 columns: " + line);
                 continue;
             }
 
@@ -90,7 +86,6 @@ public void ingestFile(LocalDate businessDate, String source, MultipartFile file
                 item.setStatus(ReconciliationStatus.MISSING_INTERNAL);
                 itemRepository.save(item);
             } catch (NumberFormatException e) {
-                // Catch potential errors if the amount column is not a valid number
                 System.err.println("Skipping line due to invalid amount format: " + line);
             }
         }
@@ -106,7 +101,7 @@ public void ingestFile(LocalDate businessDate, String source, MultipartFile file
         List<WalletTransaction> internalTxns =
     walletTransactionRepository.findAll().stream()
         .filter(txn -> txn.getCreatedAt()
-                          .atZone(ZoneId.of("UTC"))   // convert Instant → ZonedDateTime
+                          .atZone(ZoneId.of("UTC"))   // convert Instant to ZonedDateTime
                           .toLocalDate()              // extract LocalDate
                           .equals(businessDate))
         .collect(Collectors.toList());

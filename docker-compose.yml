@@ -14,6 +14,10 @@ services:
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     networks:
       - wallet-net
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U wallet_user -d wallet_settlement_db" ]
+      interval: 5s
+      retries: 5
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -31,8 +35,10 @@ services:
     build: .
     container_name: wallet_service
     depends_on:
-      - postgres
-      - rabbitmq
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/wallet_settlement_db
       SPRING_DATASOURCE_USERNAME: wallet_user
@@ -49,8 +55,11 @@ services:
     networks:
       - wallet-net
 
+
 volumes:
   postgres_data:
 
 networks:
   wallet-net:
+
+

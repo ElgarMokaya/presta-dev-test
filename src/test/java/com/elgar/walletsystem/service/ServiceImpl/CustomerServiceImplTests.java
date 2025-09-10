@@ -17,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -93,13 +92,13 @@ public class CustomerServiceImplTests {
 
         WalletResponse response = customerService.createWallet(customerId);
 
-        // Assertions to verify the response
+        // Assertions
         assertNotNull(response);
         assertEquals(walletId, response.getId());
         assertEquals(customerId, response.getCustomerId());
         assertEquals(BigDecimal.ZERO, response.getBalance());
 
-        // Verify repository interactions
+        // Verify
         verify(customerRepository, times(1)).findById(customerId);
         verify(walletRepository, times(1)).save(any(Wallet.class));
     }
@@ -117,9 +116,8 @@ public class CustomerServiceImplTests {
 
         assertEquals("Customer not found: " + customerId, thrown.getMessage());
 
-        // Verify repository interactions
+        // Verify
         verify(customerRepository, times(1)).findById(customerId);
-        // Ensure walletRepository.save() was never called because the customer was not found
         verify(walletRepository, never()).save(any(Wallet.class));
     }
 }
