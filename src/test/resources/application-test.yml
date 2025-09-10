@@ -1,0 +1,41 @@
+server:
+  port: 0
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: wallet-settlement-system-test
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: 'guest'
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wallet_settlement_test
+    username: wallet_user
+    password: 'wallet_pass'
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop  # drop and recreate schema for tests
+    show-sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db-changelog-master.yaml
+    enabled: false
+
+queue:
+  wallet:
+    exchange: wallet.txn.exchange.test
+    routing-key: wallet.txn.test
+    name: wallet.transactions.test
