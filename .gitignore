@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+*.yaml
+*.yml
+
 # Log file
 *.log
 
