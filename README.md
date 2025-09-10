@@ -5,6 +5,13 @@ This is a Spring Boot–based backend service for managing **customers, wallets,
 
 ---
 
+
+## Limitations
+
+- Authentication and authorization were not included due to limited time.  
+  In a real production system, this would typically be implemented using Spring Security with JWT or OAuth2.
+---
+
 ## Features
 
 - Customer management (create customers and wallets).
