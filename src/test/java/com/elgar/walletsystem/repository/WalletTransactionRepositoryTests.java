@@ -4,9 +4,6 @@ import com.elgar.walletsystem.enums.TransactionType;
 import com.elgar.walletsystem.model.Customer;
 import com.elgar.walletsystem.model.Wallet;
 import com.elgar.walletsystem.model.WalletTransaction;
-import com.elgar.walletsystem.repository.CustomerRepository;
-import com.elgar.walletsystem.repository.WalletRepository;
-import com.elgar.walletsystem.repository.WalletTransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,6 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-//@Rollback(true)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public class WalletTransactionRepositoryTests {
@@ -131,7 +127,6 @@ public class WalletTransactionRepositoryTests {
         assertEquals(2, transactionPage.getTotalElements());
         assertEquals(1, transactionPage.getTotalPages());
 
-        // Assert that the transactions are sorted by createdAt in descending order
         List<WalletTransaction> transactions = transactionPage.getContent();
         assertEquals(2, transactions.size());
         assertEquals("new-txn", transactions.get(0).getClientTxnId());

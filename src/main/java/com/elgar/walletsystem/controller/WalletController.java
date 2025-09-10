@@ -48,7 +48,7 @@ public class WalletController {
         return ResponseEntity.ok(resp);
     }
 
-    // GET /api/v1/wallets/{walletId}/transactions?page=0&size=20
+
     @GetMapping("/{walletId}/transactions")
     public ResponseEntity<PagedResponse<TransactionResponse>> listTransactions(
             @PathVariable("walletId") UUID walletId,

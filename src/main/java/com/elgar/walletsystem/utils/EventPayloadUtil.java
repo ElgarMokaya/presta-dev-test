@@ -11,11 +11,9 @@ public class EventPayloadUtil {
 
     public static Object toJsonPayload(TransactionResponse response, ObjectMapper mapper) {
         try {
-            // Convert DTO → Map so Hibernate can persist as jsonb
             return mapper.convertValue(response, new TypeReference<Map<String, Object>>() {
             });
         } catch (IllegalArgumentException e) {
-            // fallback minimal payload
             return Map.of("transactionId", response.getId());
         }
     }

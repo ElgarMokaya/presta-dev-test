@@ -8,7 +8,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface ReconciliationMapper {
-    //ReconciliationMapper INSTANCE = Mappers.getMapper(ReconciliationMapper.class);
 
     ReconciliationItemResponse toItemResponse(ReconciliationItem entity);
 

@@ -3,14 +3,11 @@ package com.elgar.walletsystem.repository;
 import com.elgar.walletsystem.enums.AggregateType;
 import com.elgar.walletsystem.enums.TransactionType;
 import com.elgar.walletsystem.model.OutboxEvent;
-import com.elgar.walletsystem.repository.OutboxEventRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 
 import java.time.Instant;
 import java.util.List;
@@ -19,7 +16,6 @@ import java.util.UUID;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest
-//@Rollback(true)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public class OutboxEventRepositoryTests {
